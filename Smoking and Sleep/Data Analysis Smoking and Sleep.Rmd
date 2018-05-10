@@ -1,0 +1,51 @@
+---
+title: "Fun"
+author: "Chris Shockley"
+date: "May 9, 2018"
+output: html_document
+---
+
+---
+title: "MARGIN PROJECT"
+author: "Chris Shockley"
+date: "April 30, 2018"
+output:
+  html_document: default
+  word_document: default
+  pdf_document: default
+---
+# Table of contents
+1. [Introduction](#testing 123)
+2. [Methodology](#paragraph1)
+3. [Project](#paragraph2)
+    1. [Data Cleaning](#Data_cleaning)
+    1. [Creating Industry Vectors](#code)
+    2. [Randomization](#for loop)
+    3. [Confidence Intervals](#anova analysis)
+4. [Conclusion](#conclusion_of_Null)
+
+## Introduction <a name="testing_123"></a>
+This Analysis deals with the question as to whether or not there is a difference a statistcal difference between quality of sleep and smoking cigarrettes.  The data set used is the NHANES data set.  
+
+```{r}
+library(NHANES)
+library(ggplot2)
+library(dplyr)
+
+```
+
+```{r}
+names(NHANES)
+df <- NHANES[,c("SleepHrsNight", "SmokeNow", "Age")]
+df <- na.omit(df)
+
+df_smoke <- df[df$SmokeNow == "Yes",]
+df_nosmoke <- df[df$SmokeNow == "No",]
+
+t.test(df_smoke$SleepHrsNight, df_nosmoke$SleepHrsNight)
+
+summary(lm(df$SleepHrsNight ~ ., df))
+summary(lm(hwy~., mpg))
+
+```
+

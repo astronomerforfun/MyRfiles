@@ -54,3 +54,24 @@ calc_streak = function(x)
   return(data.frame(length = streak))
   
 }
+
+
+#oilabs package (sample and Repeat 'n' times)
+
+rep_sample_n <- function(tbl, size, replace = FALSE, reps = 1)
+  
+{
+  
+  n <- nrow(tbl)
+  
+  i <- unlist(replicate(reps, sample.int(n, size, replace = replace), simplify = FALSE))
+  
+  
+  
+  rep_tbl <- cbind(replicate = rep(1:reps,rep(size,reps)), tbl[i,])
+  
+  
+  
+  dplyr::group_by(rep_tbl, replicate)
+  
+}
